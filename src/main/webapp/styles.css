@@ -1,0 +1,80 @@
+@charset "UTF-8";
+body {
+	margin: 0;
+}
+
+h1 {
+	color: white;
+}
+.some-page-wrapper {
+  font: 'Times New Roman';
+  background-color: white;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+.four-column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 4;
+}
+
+.nav-column {
+  background-color: #192841;
+  height: 100vh;
+  padding: 1em;
+}
+
+.content-column {
+  margin-top: 1.5em;
+  padding: 1em;
+  height: 100vh;
+}
+
+button {
+	display: inline-block;
+	outline: none;
+	cursor: pointer;
+	font-weight: 600;
+	border-radius: 3px;
+	padding: 12px 24px;
+	border: 0;
+	color:  #000a47;
+	background: #fff;
+	line-height: 1.15;
+	font-size: 16px;
+}
+
+#addVax {
+	display: inline-block;
+	outline: none;
+	cursor: pointer;
+	font-weight: 600;
+	border-radius: 3px;
+	padding: 12px 24px;
+	border: 0;
+	color:  #000a47;
+	background: #1de9b6;
+	line-height: 1.15;
+	font-size: 16px;
+}
+
+
+
+button:hover {
+	transition: all .1s ease;
+	box-shadow: 0 0 0 0 #fff, 0 0 0 3px #000a47;
+}
