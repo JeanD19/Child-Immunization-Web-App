@@ -72,9 +72,46 @@ button {
 	font-size: 16px;
 }
 
+#addVax:hover {
+	transition: all .1s ease;
+	box-shadow: 0 0 0 0 #fff, 0 0 0 3px #000a47;
+}
 
+
+#subVax {
+	display: inline-block;
+	outline: none;
+	cursor: pointer;
+	font-weight: 600;
+	border-radius: 3px;
+	padding: 12px 24px;
+	border: 0;
+	color:  #fbfffd;
+	background: #000a47;
+	line-height: 1.15;
+	font-size: 16px;
+}
+
+#clrBtn {
+	display: inline-block;
+	outline: none;
+	cursor: pointer;
+	font-weight: 600;
+	border-radius: 3px;
+	padding: 12px 24px;
+	border: 0;
+	color:  #fbfffd;
+	background: #ff726b;
+	line-height: 1.15;
+	font-size: 16px;
+}
+
+#clrbtn:hover {
+	transition: all .1s ease;
+	box-shadow: 0 0 0 0 #fff, 0 0 0 3px #000000;
+}
 
 button:hover {
 	transition: all .1s ease;
-	box-shadow: 0 0 0 0 #fff, 0 0 0 3px #000a47;
+	box-shadow: 0 0 0 0 #fff, 0 0 0 3px #1de9b6;
 }

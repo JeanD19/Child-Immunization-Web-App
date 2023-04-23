@@ -75,8 +75,8 @@ public class NewImmuneRec extends HttpServlet {
         out.println("</textarea>");
         out.println("<div style=\"margin-top: 1.5em\">");
         out.println("<button type=\"button\" id=\"addVax\"> Add Vax </button>");
-        out.println("<button type=\"button\"> Submit Record </button>");
-        out.println("<button type=\"button\"> Clear </button>");
+        out.println("<button type=\"button\" id=\"subVax\"> Submit Record </button>");
+        out.println("<button type=\"button\" id=\"clrBtn\"> Clear </button>");
         out.println("</div>");
         out.println("</div>");
         out.println("</div>");
