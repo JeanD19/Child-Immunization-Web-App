@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html>
@@ -16,7 +18,7 @@
 			<div class="column">
 				<div class="nav-column">
 					<h1>Child Immunization</h1>
-					<form action="NewImmuneRec.html">
+					<form action="NewImmunizationRecord.jsp">
 						<button>New Immunization Record</button>
 					</form>
 					<br /> <br />
@@ -32,13 +34,13 @@
 			<div class="four-column">
 				<div class="content-column">
 					<h2>Immunization Record</h2>
-					
-					<% 
-					 String name = (String) request.getAttribute("name");
-					 String sex = (String) request.getAttribute("sex");
-					 String dob = (String) request.getAttribute("dob");
-					 
-					 String dne = (String) request.getAttribute("dne");
+
+					<%
+					String name = (String) request.getAttribute("name");
+					String sex = (String) request.getAttribute("sex");
+					String dob = (String) request.getAttribute("dob");
+
+					String dne = (String) request.getAttribute("dne");
 					%>
 
 					<c:if test="${!(empty inputError.msg)}">
@@ -48,15 +50,13 @@
 						</p>
 						<jsp:setProperty name="inputError" property="msg" value="" />
 					</c:if>
-					
+
 					<c:if test="${!(empty dne)}">
 						<p style="color: red">
 							Error :
 							<c:out value="${dne}" />
 						</p>
 					</c:if>
-					
-
 
 					<form method="post" action="findNhis.jsp">
 						<h3>NHIS #</h3>
@@ -67,14 +67,15 @@
 					<h3>Name</h3>
 					<input id="childName" type="text" value="<%=name%>" disabled>
 					<h3>Sex</h3>
-					<input type="text" value="<%=sex%>"disabled>
+					<input type="text" id="sex" value="<%=sex%>" disabled>
 					<h3>DOB</h3>
-					<input type="date" value="<%=dob %>" disabled>
+					<input type="date" id="dob" value="<%=dob%>" disabled>
 					<h3>Weight</h3>
-					<input type="number">
+					<input type="number" id="weight">
 
 					<h3>Vaccine</h3>
-					<select>
+					<select id="vaccines">
+						<option value="---">---</option>
 						<option value="BCG">BCG</option>
 						<option value="Penta">Pentavalent</option>
 						<option value="Pneumo">Pneumo</option>
@@ -84,11 +85,23 @@
 						<option value="Vitamin A">Vitamin A</option>
 					</select>
 					<h3>Remarks</h3>
-					<textarea rows="5" cols="33"></textarea>
+					<textarea rows="5" cols="33" id="remarks"></textarea>
 					<div style="margin-top: 1.5em">
 						<button type="button" id="addVax">Add Vax</button>
 						<button type="button" id="subVax">Submit Record</button>
-						<button type="button" id="clrBtn">Clear</button>
+						<button type="button" onclick="clearElements()" id="clrBtn">Clear</button>
+
+						<script>
+							function clearElements() {
+								document.getElementById("childName").value = '';
+								document.getElementById("sex").value = '';
+								document.getElementById("dob").value = '';
+								document.getElementById("weight").value = '';
+								document.getElementById("vaccines").selectedIndex = 0;
+								document.getElementById("remarks").value = '';
+							}
+						</script>
+						
 					</div>
 				</div>
 			</div>
