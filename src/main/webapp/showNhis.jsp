@@ -1,6 +1,7 @@
 <%@ taglib uri='http://java.sun.com/jsp/jstl/core' prefix='c'%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page import="java.sql.Connection, java.sql.DriverManager, java.sql.SQLException, java.sql.Statement, java.sql.ResultSet"%>
+<%@ page import="java.util.ArrayList, java.util.List" %>
 
 <!-- Validation of NHIS number -->
 
@@ -29,33 +30,45 @@ Connection conn = DriverManager.getConnection(url, user, password);
 //Step 2: Allocate a 'Statement' object in the Connection
 Statement stmt = conn.createStatement();
 
-String nhisnum = request.getParameter("nhisnum");
+int nhisnum = Integer.parseInt(request.getParameter("nhisnum"));
 
 String sqlStr = "select * from patients where nhis = '" + nhisnum + "'";
+ResultSet rset1 = stmt.executeQuery(sqlStr); // Send the query to the server
+
+String patientName = rset1.getString("name");
+
+sqlStr = "select * from immunerecords where nhis = '" + nhisnum + "'";
 ResultSet rset = stmt.executeQuery(sqlStr); // Send the query to the server
 
-if(rset.next()){
-	String patientName = rset.getString("name");
-	String patientSex = rset.getString("sex");
-	String patientDob = rset.getString("dob");
-	
-	request.setAttribute("nhis", nhisnum);
-	request.setAttribute("name", patientName);
-	request.setAttribute("sex", patientSex);
-	request.setAttribute("dob", patientDob);
 
-	
-	System.out.println(nhisnum + " " + patientName + " " + patientSex + " " + patientDob);
-	// Forward the request to index.html
-	RequestDispatcher dispatcher = request.getRequestDispatcher("NewImmunizationRecord.jsp");
-	dispatcher.forward(request, response);
-}
+
+List<String> vaccines = new ArrayList<String>();
+List<String> remarks = new ArrayList<String>();
+List<String> datesOfVax = new ArrayList<String>();
+
 //id doesn't exists
-else {
+if(rset.getRow() == 0){
 	String dnemsg = "This nhis number does not exists in this table!";
 	request.setAttribute("dne", dnemsg);
-	RequestDispatcher dispatcher = request.getRequestDispatcher("NewImmunizationRecord.jsp");
+	RequestDispatcher dispatcher = request.getRequestDispatcher("ViewImmuneRec.jsp");
 	dispatcher.forward(request, response);
-	
 }
+
+while (rset.next()) {
+	vaccines.add(rset.getString("vaccine"));
+	remarks.add(rset.getString("remarks"));
+	datesOfVax.add(rset.getString("date"));
+}
+
+request.setAttribute("vaxes", vaccines);
+request.setAttribute("name", patientName);
+request.setAttribute("remarks", remarks);
+request.setAttribute("dates", datesOfVax);
+
+
+System.out.println(nhisnum + " " + patientName + " " + vaccines + " " + remarks + " " + datesOfVax);
+
+RequestDispatcher dispatcher = request.getRequestDispatcher("ViewImmuneRec.jsp");
+dispatcher.forward(request, response);
+
 %>

@@ -4,5 +4,27 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
     version="4.0">
   <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+  	<description>
+  	</description>
+  	<display-name>AddVax</display-name>
+  	<servlet-name>AddVax</servlet-name>
+  	<servlet-class>AddVax</servlet-class>
+  </servlet>
+  <servlet>
+  	<description>
+  	</description>
+  	<display-name>addVax</display-name>
+  	<servlet-name>addVax</servlet-name>
+  	<servlet-class>addVax</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>AddVax</servlet-name>
+  	<url-pattern>/AddVax</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>addVax</servlet-name>
+  	<url-pattern>/addVax</url-pattern>
+  </servlet-mapping>
 </web-app>
 
